@@ -36,7 +36,7 @@ if (empty($name) || empty($email) || empty($password) || empty($confirm_password
           "email" => $email,
           "password" => password_hash($password, PASSWORD_DEFAULT)
      ]);
-
+     
      // redirect to login
      header("Location: /login");
      exit;

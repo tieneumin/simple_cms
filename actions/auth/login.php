@@ -17,7 +17,7 @@ if (empty($email) || empty($password)) {
   $query -> execute(["email" => $email]);
   $user = $query -> fetch();
   if (empty($user)) {
-    setError("Email does not exist.", "/login");
+    setError("Account does not exist.", "/login");
   } else {
     // ensure password correct
     if (password_verify($password, $user["password"])) {
@@ -27,7 +27,7 @@ if (empty($email) || empty($password)) {
       header("Location: /");
       exit;
     } else {
-      setError("Password is incorrect.", "/login");
+      setError("Incorrect password.", "/login");
     }
   }
 }

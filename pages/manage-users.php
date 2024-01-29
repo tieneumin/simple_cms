@@ -3,7 +3,7 @@
       <div class="d-flex justify-content-between align-items-center mb-2">
         <h1 class="h1">Manage Users</h1>
         <div class="text-end">
-          <a href="manage-users-add.html" class="btn btn-primary btn-sm"
+          <a href="/manage-users-add" class="btn btn-primary btn-sm"
             >Add New User</a
           >
         </div>
@@ -20,6 +20,7 @@
             </tr>
           </thead>
           <tbody>
+            <!-- pending reverseArray foreach, user data table, query row-specific data -->
             <tr>
               <th scope="row">3</th>
               <td>Jack</td>
@@ -28,21 +29,22 @@
               <td class="text-end">
                 <div class="buttons">
                   <a
-                    href="manage-users-edit.html"
+                    href="/manage-users-edit"
                     class="btn btn-success btn-sm me-2"
                     ><i class="bi bi-pencil"></i
                   ></a>
                   <a
-                    href="manage-users-changepwd.html"
+                    href="/manage-users-changepwd"
                     class="btn btn-warning btn-sm me-2"
                     ><i class="bi bi-key"></i
                   ></a>
-                  <a href="#" class="btn btn-danger btn-sm"
+                  <a href="/deleteuser_action" class="btn btn-danger btn-sm"
                     ><i class="bi bi-trash"></i
                   ></a>
                 </div>
               </td>
             </tr>
+            <!-- end of foreach -->
             <tr>
               <th scope="row">2</th>
               <td>Jane</td>
@@ -51,16 +53,16 @@
               <td class="text-end">
                 <div class="buttons">
                   <a
-                    href="manage-users-edit.html"
+                    href="/manage-users-edit"
                     class="btn btn-success btn-sm me-2"
                     ><i class="bi bi-pencil"></i
                   ></a>
                   <a
-                    href="manage-users-changepwd.html"
+                    href="/manage-users-changepwd"
                     class="btn btn-warning btn-sm me-2"
                     ><i class="bi bi-key"></i
                   ></a>
-                  <a href="#" class="btn btn-danger btn-sm"
+                  <a href="/deleteuser_action" class="btn btn-danger btn-sm"
                     ><i class="bi bi-trash"></i
                   ></a>
                 </div>
@@ -74,16 +76,16 @@
               <td class="text-end">
                 <div class="buttons">
                   <a
-                    href="manage-users-edit.html"
+                    href="/manage-users-edit"
                     class="btn btn-success btn-sm me-2"
                     ><i class="bi bi-pencil"></i
                   ></a>
                   <a
-                    href="manage-users-changepwd.html"
+                    href="/manage-users-changepwd"
                     class="btn btn-warning btn-sm me-2"
                     ><i class="bi bi-key"></i
                   ></a>
-                  <a href="#" class="btn btn-danger btn-sm"
+                  <a href="/deleteuser_action" class="btn btn-danger btn-sm"
                     ><i class="bi bi-trash"></i
                   ></a>
                 </div>
@@ -93,7 +95,7 @@
         </table>
       </div>
       <div class="text-center">
-        <a href="dashboard.html" class="btn btn-link btn-sm"
+        <a href="/dashboard" class="btn btn-link btn-sm"
           ><i class="bi bi-arrow-left"></i> Back to Dashboard</a
         >
       </div>

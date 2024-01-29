@@ -1,8 +1,16 @@
 
 <?php $database = connectToDB(); ?>
 <?php require "parts/header.php"; ?>
-    <div class="container mx-auto my-5" style="max-width: 500px;">
-      <h1 class="h1 mb-4 text-center">My Blog</h1>
+  <div class="container mx-auto my-5" style="max-width: 500px;">
+    <h1 class="h1 mb-4 text-center">
+      <?php if (isset($_SESSION["user"])): ?>
+        <?= $_SESSION["user"]["name"]; ?>'s Blog
+      <?php else: ?>
+        Simple CMS
+      <?php endif; ?>
+    </h1>
+    <?php if (isset($_SESSION["user"])): ?>
+      <!-- pending reverseArray foreach, separate post data table -->
       <div class="card mb-2">
         <div class="card-body">
           <h5 class="card-title">Post 4</h5>
@@ -12,6 +20,7 @@
           </div>
         </div>
       </div>
+      <!-- end of foreach -->
       <div class="card mb-2">
         <div class="card-body">
           <h5 class="card-title">Post 3</h5>
@@ -39,11 +48,17 @@
           </div>
         </div>
       </div>
+    <?php endif; ?>
 
-      <div class="mt-4 d-flex justify-content-center gap-3">
+    <div class="mt-4 d-flex justify-content-center gap-3">
+      <?php if (isset($_SESSION["user"])): ?>
+        <a href="/dashboard" class="btn btn-link btn-sm">Dashboard</a>
+        <a href="/logout_action" class="btn btn-link btn-sm">Logout</a>
+      <?php else: ?>
         <a href="/login" class="btn btn-link btn-sm">Login</a>
         <a href="/signup" class="btn btn-link btn-sm">Sign Up</a>
-      </div>
+      <?php endif; ?>
     </div>
+  </div>
 
 <?php require "parts/footer.php"; ?>

@@ -1,4 +1,5 @@
 <?php // all functions go here
+$test = "functions.php is working";
 
 // for pages/actions requiring database info
 function connectToDB() {
@@ -23,4 +24,3 @@ function setError($error_message, $redirect_page) {
     exit;
 }
 
-$test = "functions.php is parsing correctly";
