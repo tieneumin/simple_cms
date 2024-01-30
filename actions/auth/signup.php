@@ -2,7 +2,7 @@
 // connect to database
 $database = connectToDB();
 
-// get posted form data
+// get data from POST
 $name = $_POST["name"];
 $email = $_POST["email"];
 $password = $_POST["password"];
@@ -19,13 +19,13 @@ if (empty($name) || empty($email) || empty($password) || empty($confirm_password
 } else if (strlen($password) < 8) {
   setError("Password must be at least 8 characters.", "/signup");
 } else {
-  // ensure email not in use
+  // ensure email not in use 1/2
   $sql = "SELECT * FROM users WHERE email = :email";
   $query = $database -> prepare($sql);
   $query -> execute(["email" => $email]);
   $user = $query -> fetch();
-
   if (empty($user)) {
+    
     // create user account
     $sql = "INSERT INTO users (`name`,`email`,`password`) VALUES (:name, :email, :password)";
     $query = $database -> prepare($sql);
@@ -42,6 +42,7 @@ if (empty($name) || empty($email) || empty($password) || empty($confirm_password
     header("Location: /login");
     exit;
 
+  // ensure email not in use 2/2
   } else {
     setError("Email is already in use.", "/signup");
   }

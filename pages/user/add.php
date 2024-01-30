@@ -40,7 +40,7 @@
               />
             </div>
             <div class="col">
-              <label for="confirm_password" class="form_label"
+              <label for="confirm_password" class="form-label"
                 >Confirm Password</label
               >
               <input
@@ -71,7 +71,7 @@
       </form>
     </div>
     <div class="text-center">
-      <a href="/manage-users" class="btn btn-link btn-sm"
+      <a href="/manageuser" class="btn btn-link btn-sm"
         ><i class="bi bi-arrow-left"></i> Back to Users</a
       >
     </div>

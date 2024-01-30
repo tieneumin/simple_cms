@@ -12,7 +12,8 @@
               type="text"
               class="form-control"
               id="post-title"
-              name="title"/>
+              name="title"
+            />
           </div>
           <div class="mb-3">
             <label for="post-content" class="form-label">Content</label>
@@ -29,7 +30,7 @@
         </form>
       </div>
       <div class="text-center">
-        <a href="/manage-posts" class="btn btn-link btn-sm"
+        <a href="/managepost" class="btn btn-link btn-sm"
           ><i class="bi bi-arrow-left"></i> Back to Posts</a
         >
       </div>

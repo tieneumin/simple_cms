@@ -1,21 +1,23 @@
 <?php
-// var_dump($_SERVER["DOCUMENT_ROOT"]); // '/www/kinsta/public/simple-cms'
+// var_dump($_SERVER["DOCUMENT_ROOT"]); // "/www/kinsta/public/simple-cms"
 
-// starts session; required on any page SESSION global variable is used
+// start session; required on any page SESSION global variable is used
 session_start();
+
 // current session credentials
-// if (isset($_SESSION["user"])) {
-//   print_r($_SESSION["user"]);
-// } 
+if (isset($_SESSION["user"])) {
+  print_r($_SESSION["user"]);
+} 
 
 require "actions/functions.php";
-// sanity check
-// echo "<br>".$test;
+// echo "<br>".$test; // sanity check
 
 // Uniform Resource Identifier requested by prior page i.e. header("Location: X");
 $path = $_SERVER["REQUEST_URI"];
-// to confirm routing
-// var_dump($_SERVER["REQUEST_URI"]);
+var_dump($_SERVER["REQUEST_URI"]); // current route
+
+// // remove query from URL in GET scenario
+// $path = parse_url($path, PHP_URL_PATH);
 
 // remove starting slash
 $path = trim($path, "/");
@@ -31,76 +33,75 @@ switch ($path) {
   case "logout_action":
     require "actions/auth/logout.php";
     break;
-  // pending below actions  
-  case 'addpost_action':
-    require 'actions/posts/add.php';
+  case "addpost_action":
+    require "actions/post/add.php";
     break;
-  case 'updatepost_action':
-    require 'actions/posts/update.php';
+  case "updatepost_action":
+    require "actions/post/update.php";
     break;
-  case 'deletepost_action':
-    require 'actions/posts/delete.php';
+  case "deletepost_action":
+    require "actions/post/delete.php";
     break;
-  case 'adduser_action':
-    require 'actions/users/add.php';
+  case "adduser_action":
+    require "actions/user/add.php";
     break;
-  case 'updateuser_action':
-    require 'actions/users/update.php';
+  case "updateuser_action":
+    require "actions/user/update.php";
     break;
-  case 'changepassword_action':
-    require 'actions/users/password.php';
+  case "changepassword_action":
+    require "actions/user/changepassword.php";
     break;
-  case 'deleteuser_action':
-    require 'actions/users/delete.php';
+  case "deleteuser_action":
+    require "actions/user/delete.php";
     break;
 
   // pages
-  case "manage-users-changepwd":
-    $page_title_suffix = "Change Password";
-    require "pages/manage-users-changepwd.php";
-    break;
-  case "manage-users-edit":
-    $page_title_suffix = "Edit User";
-    require "pages/manage-users-edit.php";
-    break;
-  case "manage-users-add":
-    $page_title_suffix = "Add New User";
-    require "pages/manage-users-add.php";
-    break;
-  case "manage-users":
-    $page_title_suffix = "Manage Users";
-    require "pages/manage-users.php";
-    break;
-  case "manage-posts-edit":
-    $page_title_suffix = "Edit Post";
-    require "pages/manage-posts-edit.php";
-    break; 
-  case "manage-posts-add":
-    $page_title_suffix = "Add New Post";
-    require "pages/manage-posts-add.php";
-    break;  
-  case "manage-posts":
-      $page_title_suffix = "Manage Posts";
-      require "pages/manage-posts.php";
-      break;
-  case "post":
-    // $page_title_suffix = "Post";
-    require "pages/post.php";
-    break;
-  case "dashboard":
-    $page_title_suffix = "Dashboard";
-    require "pages/dashboard.php";
-    break;
-  case "login":
-    $page_title_suffix = "Login";
-    require "pages/login.php";
-    break;
   case "signup":
-    $page_title_suffix = "Sign Up";
+    $subpage_title = "Sign Up";
     require "pages/signup.php";
     break;
+  case "login":
+    $subpage_title = "Login";
+    require "pages/login.php";
+    break;
+  case "dashboard":
+    $subpage_title = "Dashboard";
+    require "pages/dashboard.php";
+    break;
+  case "post":
+    // $subpage_title = "Post";
+    require "pages/post.php";
+    break;
+  case "managepost":
+    $subpage_title = "Manage Posts";
+    require "pages/post/manage.php";
+    break;
+  case "addpost":
+    $subpage_title = "Add New Post";
+    require "pages/post/add.php";
+    break;  
+  case "editpost":
+    $subpage_title = "Edit Post";
+    require "pages/post/edit.php";
+    break; 
+  case "manageuser":
+    $subpage_title = "Manage Users";
+    require "pages/user/manage.php";
+    break;
+  case "adduser":
+    $subpage_title = "Add New User";
+    require "pages/user/add.php";
+    break;
+  case "edituser":
+    $subpage_title = "Edit User";
+    require "pages/user/edit.php";
+    break;
+  case "changepassword":
+    $subpage_title = "Change Password";
+    require "pages/user/changepassword.php";
+    break;
   default:
-    $page_title_suffix = "Home";
+    $subpage_title = "Home";
     require "pages/home.php";
     break;
 }

@@ -12,14 +12,15 @@
               Manage Posts
             </h5>
             <div class="text-center mt-3">
-              <a href="/manage-posts" class="btn btn-primary btn-sm"
+              <a href="/managepost" class="btn btn-primary btn-sm"
                 >Access</a
               >
             </div>
           </div>
         </div>
       </div>
-      <?php if (isset($_SESSION["user"]["role"]) && $_SESSION["user"]["role"] === "admin"): ?>
+      <!-- only show if user is admin -->
+      <?php if (isset($_SESSION["user"]) && $_SESSION["user"]["role"] === "admin"): ?>
         <div class="col">
           <div class="card mb-2">
             <div class="card-body">
@@ -30,7 +31,7 @@
                 Manage Users
               </h5>
               <div class="text-center mt-3">
-                <a href="/manage-users" class="btn btn-primary btn-sm"
+                <a href="/manageuser" class="btn btn-primary btn-sm"
                   >Access</a
                 >
               </div>
@@ -38,6 +39,7 @@
           </div>
         </div>
       <?php endif; ?>
+      
     </div>
     <div class="mt-4 text-center">
       <a href="/" class="btn btn-link btn-sm"
@@ -45,5 +47,5 @@
       >
     </div>
   </div>
-
+  
 <?php require "parts/footer.php"; ?>

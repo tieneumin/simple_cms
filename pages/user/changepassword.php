@@ -1,4 +1,15 @@
-<?php require "parts/header.php"; ?>
+<?php
+  // connect to database
+  $database = connectToDB();
+
+  // if id sent to POST, create edit instance for id
+  if (isset($_POST["id"])) {
+    $_SESSION["edit"] = $_POST["id"];
+  }
+  // var_dump($_SESSION["edit"]); // sanity check
+
+  require "parts/header.php";
+?>
   <div class="container mx-auto my-5" style="max-width: 700px">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <h1 class="h1">Change Password</h1>
@@ -9,23 +20,23 @@
         <div class="mb-3">
           <div class="row">
             <div class="col">
-              <label for="password" class="form-label">Password</label>
+              <label for="password" class="form-label">New Password</label>
               <input 
                 type="password" 
                 class="form-control" 
                 id="password" 
-                name="password" 
+                name="password"
               />
             </div>
             <div class="col">
-              <label for="confirm-password" class="form-label"
+              <label for="confirm_password" class="form-label"
                 >Confirm Password</label
               >
               <input
                 type="password"
                 class="form-control"
-                id="confirm-password"
-                name="confirm-password"
+                id="confirm_password"
+                name="confirm_password"
               />
             </div>
           </div>
@@ -38,7 +49,7 @@
       </form>
     </div>
     <div class="text-center">
-      <a href="/manage-users" class="btn btn-link btn-sm"
+      <a href="/manageuser" class="btn btn-link btn-sm"
         ><i class="bi bi-arrow-left"></i> Back to Users</a
       >
     </div>

@@ -1,7 +1,7 @@
 <?php
-// logs user out
+// log user out
 unset($_SESSION['user']);
 
-// redirect user to home page
+// redirect to home page
 header("Location: /");
 exit;

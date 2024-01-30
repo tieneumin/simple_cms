@@ -1,4 +1,24 @@
-<?php require "parts/header.php"; ?>
+<?php
+  // connect to database
+  $database = connectToDB();
+
+  // if id sent to POST, create edit instance for id
+  if (isset($_POST["id"])) {
+    $_SESSION["edit"] = $_POST["id"];
+  }
+  // var_dump($_SESSION["edit"]); // sanity check
+  
+  // get data from SESSION
+  $id = $_SESSION["edit"];
+
+  // query for target user
+  $sql = "SELECT * FROM users WHERE id = :id"; 
+  $query = $database -> prepare($sql);
+  $query -> execute(["id" => $id]);
+  $user = $query -> fetch();
+  
+  require "parts/header.php";
+?>
   <div class="container mx-auto my-5" style="max-width: 700px">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <h1 class="h1">Edit User</h1>
@@ -15,6 +35,7 @@
                 class="form-control"
                 id="name"
                 name="name"
+                value="<?= $user["name"]; ?>"
               />
             </div>
             <div class="col">
@@ -24,6 +45,7 @@
                 class="form-control" 
                 id="email"
                 name="email"
+                value="<?= $user["email"]; ?>"
               />
             </div>
           </div>
@@ -36,9 +58,16 @@
             name="role"
           >
             <option value="">Select an option</option>
-            <option value="user">User</option>
-            <option value="editor">Editor</option>
-            <option value="admin">Admin</option>
+            <!-- role-based "selected" attribute assignment to preselect option -->
+            <option value="user"
+              <?= $user["role"] === "user"? "selected": "" ?>
+            >User</option>
+            <option value="editor" 
+              <?= $user["role"] === "editor"? "selected": "" ?> 
+            >Editor</option>
+            <option value="admin"
+              <?= $user["role"] === "admin"? "selected": "" ?> 
+            >Admin</option>
           </select>
         </div>
         <div class="d-grid">
@@ -47,7 +76,7 @@
       </form>
     </div>
     <div class="text-center">
-      <a href="/manage-users" class="btn btn-link btn-sm"
+      <a href="/manageuser" class="btn btn-link btn-sm"
         ><i class="bi bi-arrow-left"></i> Back to Users</a
       >
     </div>

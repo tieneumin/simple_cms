@@ -3,12 +3,13 @@
     <div class="d-flex justify-content-between align-items-center mb-2">
       <h1 class="h1">Manage Posts</h1>
       <div class="text-end">
-        <a href="/manage-posts-add" class="btn btn-primary btn-sm"
+        <a href="/addpost" class="btn btn-primary btn-sm"
           >Add New Post</a
         >
       </div>
     </div>
     <div class="card mb-2 p-4">
+      <?php require "parts/message_success.php"; ?>
       <table class="table">
         <thead>
           <tr>
@@ -33,7 +34,7 @@
                   ><i class="bi bi-eye"></i
                 ></a>
                 <a
-                  href="/manage-posts-edit"
+                  href="/editpost"
                   class="btn btn-secondary btn-sm me-2"
                   ><i class="bi bi-pencil"></i
                 ></a>
@@ -57,7 +58,7 @@
                   ><i class="bi bi-eye"></i
                 ></a>
                 <a
-                  href="/manage-posts-edit"
+                  href="/editpost"
                   class="btn btn-secondary btn-sm me-2"
                   ><i class="bi bi-pencil"></i
                 ></a>
@@ -80,7 +81,7 @@
                   ><i class="bi bi-eye"></i
                 ></a>
                 <a
-                  href="/manage-posts-edit"
+                  href="/editpost"
                   class="btn btn-secondary btn-sm me-2"
                   ><i class="bi bi-pencil"></i
                 ></a>
@@ -103,7 +104,7 @@
                   ><i class="bi bi-eye"></i
                 ></a>
                 <a
-                  href="/manage-posts-edit"
+                  href="/editpost"
                   class="btn btn-secondary btn-sm me-2"
                   ><i class="bi bi-pencil"></i
                 ></a>
@@ -126,7 +127,7 @@
                   ><i class="bi bi-eye"></i
                 ></a>
                 <a
-                  href="/manage-posts-edit"
+                  href="/editpost"
                   class="btn btn-secondary btn-sm me-2"
                   ><i class="bi bi-pencil"></i
                 ></a>

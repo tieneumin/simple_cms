@@ -1,3 +1,4 @@
+<!-- redirect if user already logged in -->
 <?php if (isset($_SESSION["user"])): ?>
   <?php 
     header("Location: /");

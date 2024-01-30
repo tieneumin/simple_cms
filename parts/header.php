@@ -1,8 +1,8 @@
-<!-- repeated top of page as per DRY principle -->
+<!-- repeated start of HTML as per DRY principle -->
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple CMS <?= isset($page_title_suffix)? " - ".$page_title_suffix: ""; ?></title>
+    <title>Simple CMS <?= isset($subpage_title)? " - ".$subpage_title: ""; ?></title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"

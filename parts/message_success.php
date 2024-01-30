@@ -1,4 +1,4 @@
-<!-- show error box if $_SESSION["error"] has value -->
+<!-- show success box if $_SESSION["success"] has value -->
 <?php if (isset($_SESSION["success"])): ?>
     <div class="alert alert-success" role="alert">
     <?= $_SESSION["success"]; ?>

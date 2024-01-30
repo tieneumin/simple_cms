@@ -1,3 +1,4 @@
+<!-- redirect if user already logged in -->
 <?php if (isset($_SESSION["user"])): ?>
   <?php 
     header("Location: /");
@@ -14,11 +15,21 @@
         <form method="POST" action="/signup_action">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" />
+            <input 
+              type="text"
+              class="form-control"
+              id="name"
+              name="name" 
+            />
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" />
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+            />
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
