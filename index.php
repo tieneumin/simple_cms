@@ -4,18 +4,18 @@
 // starts session; required on any page SESSION global variable is used
 session_start();
 // current session credentials
-if (isset($_SESSION["user"])) {
-  print_r($_SESSION["user"]);
-}
+// if (isset($_SESSION["user"])) {
+//   print_r($_SESSION["user"]);
+// }
 
 require "actions/functions.php";
 // sanity check
-echo "<br>".$test;
+// echo "<br>".$test;
 
 // Uniform Resource Identifier requested by prior page i.e. header("Location: X");
 $path = $_SERVER["REQUEST_URI"];
 // to confirm routing
-var_dump($_SERVER["REQUEST_URI"]);
+// var_dump($_SERVER["REQUEST_URI"]);
 
 // remove starting slash
 $path = trim($path, "/");
