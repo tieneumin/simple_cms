@@ -4,7 +4,7 @@
       <h1 class="h1">Add New User</h1>
     </div>
     <div class="card mb-2 p-4">
-      <?php require "parts/error.php"; ?>
+      <?php require "parts/message_error.php"; ?>
       <form method="POST" action="/adduser_action">
         <div class="mb-3">
           <div class="row">
@@ -40,14 +40,14 @@
               />
             </div>
             <div class="col">
-              <label for="confirm-password" class="form-label"
+              <label for="confirm_password" class="form_label"
                 >Confirm Password</label
               >
               <input
                 type="password"
                 class="form-control"
-                id="confirm-password"
-                name="confirm-password"
+                id="confirm_password"
+                name="confirm_password"
               />
             </div>
           </div>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple CMS - <?= $page_title_suffix; ?></title>
+    <title>Simple CMS <?= isset($page_title_suffix)? " - ".$page_title_suffix: ""; ?></title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"

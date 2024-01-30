@@ -6,7 +6,7 @@ session_start();
 // current session credentials
 // if (isset($_SESSION["user"])) {
 //   print_r($_SESSION["user"]);
-// }
+// } 
 
 require "actions/functions.php";
 // sanity check

@@ -4,7 +4,7 @@
       <h1 class="h1">Edit Post</h1>
     </div>
     <div class="card mb-2 p-4">
-      <?php require "parts/error.php"; ?>
+      <?php require "parts/message_error.php"; ?>
       <form method="POST" action="/updatepost_action">
         <div class="mb-3">
           <label for="post-title" class="form-label">Title</label>
