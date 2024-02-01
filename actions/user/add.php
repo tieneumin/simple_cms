@@ -1,4 +1,6 @@
 <?php
+require "parts/auth_admin.php";
+
 // connect to database
 $database = connectToDB();
 
@@ -37,12 +39,8 @@ if (empty($name) || empty($email) || empty($password) || empty($confirm_password
       "role" => $role
     ]);
 
-    // confirm user added
-    $_SESSION["success"] = "User added.";
-    
-    // redirect to Manage Users
-    header("Location: /manageuser");
-    exit;
+    // confirm user added and redirect
+    setSuccess("User added.", "/manageuser");
 
   // ensure email not in use 2/2
   } else {

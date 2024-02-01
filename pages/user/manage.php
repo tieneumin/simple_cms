@@ -1,4 +1,6 @@
-<?php 
+<?php
+  require "parts/auth_admin.php";
+
   // connect to database
   $database = connectToDB();
 
@@ -52,42 +54,60 @@
                   <span class="badge bg-success">User</span>
                 <?php endif; ?>
               </td>
-              
               <td class="text-end">
                 <div class="buttons">
-                  <!-- edit button -->
-                  <form method="POST" action="/edituser" class="d-inline">
-                    <input 
-                      type="hidden"
-                      name="id"
-                      value="<?= $user["id"]; ?>"
-                    />
-                    <button class="btn btn-success btn-sm me-2">
-                      <i class="bi bi-pencil"></i>
-                    </button>
-                  </form>
+                  <!-- edit button
+                  - GET format required for edit/changepwd buttons to accomodate both 
+                  manage_page -> edit_page AND update_action (cannot POST) -> edit_page -->
+                  <a
+                    href="/edituser?id=<?= $user["id"]; ?>"
+                    class="btn btn-success btn-sm me-2"
+                    ><i class="bi bi-pencil"></i
+                  ></a>
                   <!-- changepwd button -->
-                  <form method="POST" action="/changepassword" class="d-inline">
-                    <input 
-                      type="hidden"
-                      name="id"
-                      value="<?= $user["id"]; ?>"
-                    />
-                    <button class="btn btn-warning btn-sm me-2">
-                      <i class="bi bi-key"></i>
-                    </button>
-                  </form>
-                  <!-- delete button -->
-                  <form method="POST" action="/deleteuser_action" class="d-inline">
-                    <input 
-                      type="hidden"
-                      name="id"
-                      value="<?= $user["id"]; ?>"
-                    />
-                    <button class="btn btn-danger btn-sm">
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </form>
+                  <a
+                    href="/changepassword?id=<?= $user["id"]; ?>"
+                    class="btn btn-warning btn-sm me-2"
+                    ><i class="bi bi-key"></i
+                  ></a>
+                  <!-- delete button
+                  - assign "disabled" attribute to current user to prevent admin from deleting self
+                  - ensure unique modal targeted to avoid potential issues -->
+                  <button 
+                    class="btn btn-danger btn-sm"
+                    <?= $user["id"] === $_SESSION["user"]["id"]? "disabled": "" ?>
+                    data-bs-toggle="modal"
+                    data-bs-target="#deleteusermodal<?= $user["id"]; ?>"
+                    ><i class="bi bi-trash"></i
+                  ></button>
+
+                  <!-- delete modal -->
+                  <div class="modal fade text-start" id="deleteusermodal<?= $user["id"]; ?>">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5">Are you sure you want to delete this user? (<?= $user["email"]; ?>)</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                          This action cannot be reversed.
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <form method="POST" action="/deleteuser_action">
+                            <input 
+                              type="hidden"
+                              name="id"
+                              value="<?= $user["id"]; ?>"
+                            />
+                            <!-- button w attribute type="button" does not work with forms -->
+                            <button class="btn btn-danger">Delete</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </td>
             </tr>

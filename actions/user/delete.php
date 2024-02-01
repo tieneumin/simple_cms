@@ -1,4 +1,6 @@
 <?php
+require "parts/auth_admin.php";
+
 // connect to database
 $database = connectToDB();
 
@@ -11,11 +13,6 @@ $sql = "DELETE FROM users where id = :id";
 $query = $database -> prepare($sql);
 $query -> execute(["id" => $id]);
 
-// confirm user deletion
-$_SESSION["success"] = "User deleted.";
-
-// redirect to Manage Users
-header("Location: /manageuser");
-exit;
-
+// confirm user deletion and redirect
+setSuccess("User deleted.", "/manageuser");
  

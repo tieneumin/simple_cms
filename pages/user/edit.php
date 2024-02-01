@@ -1,15 +1,18 @@
 <?php
+  require "parts/auth_admin.php";
+  
   // connect to database
   $database = connectToDB();
 
-  // if id sent to POST, create edit instance for id
-  if (isset($_POST["id"])) {
-    $_SESSION["edit"] = $_POST["id"];
-  }
-  // var_dump($_SESSION["edit"]); // sanity check
+  // // if id sent to POST, create edit instance for id
+  // if (isset($_POST["id"])) {
+  //   $_SESSION["id"] = $_POST["id"];
+  // }
+  // var_dump($_SESSION["id"]); // sanity check
   
-  // get data from SESSION
-  $id = $_SESSION["edit"];
+  // get data from GET
+  $id = $_GET["id"];
+  // var_dump($id);
 
   // query for target user
   $sql = "SELECT * FROM users WHERE id = :id"; 
@@ -25,6 +28,7 @@
     </div>
     <div class="card mb-2 p-4">
       <?php require "parts/message_error.php"; ?>
+
       <form method="POST" action="/updateuser_action">
         <div class="mb-3">
           <div class="row">
@@ -57,8 +61,7 @@
             id="role"
             name="role"
           >
-            <option value="">Select an option</option>
-            <!-- role-based "selected" attribute assignment to preselect option -->
+            <!-- assign "selected" attribute to preselect option based on role -->
             <option value="user"
               <?= $user["role"] === "user"? "selected": "" ?>
             >User</option>
@@ -71,9 +74,15 @@
           </select>
         </div>
         <div class="d-grid">
+          <input
+            type="hidden"
+            name="id"
+            value="<?= $user["id"]; ?>"
+          />
           <button type="submit" class="btn btn-primary">Update</button>
         </div>
       </form>
+      
     </div>
     <div class="text-center">
       <a href="/manageuser" class="btn btn-link btn-sm"

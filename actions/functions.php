@@ -16,11 +16,39 @@ function connectToDB() {
   return $database;
 }
    
-// error message
+// for error message
 function setError($error_message, $redirect_page) {
   $_SESSION["error"] = $error_message;
-  // redirect back to login page
+  // redirect to other page
   header("Location: " . $redirect_page);
   exit;
 }
 
+// for success message
+function setSuccess($success_message, $redirect_page) {
+  $_SESSION["success"] = $success_message;
+  // redirect to other page
+  header("Location: " . $redirect_page);
+  exit;
+}
+
+// redirects
+// check if logged in
+function isLoggedIn() {
+  return isset($_SESSION["user"]);
+}
+
+// checks if logged in and admin 
+function isAdmin() {
+  return isLoggedIn() && $_SESSION["user"]["role"] === "admin";
+}
+
+// checks if logged in and editor
+function isEditor() {
+  return isLoggedIn() && $_SESSION["user"]["role"] === "editor";
+}
+
+// checks if logged in and user
+function isUser() {
+  return isLoggedIn() && $_SESSION["user"]["role"] === "user";
+}

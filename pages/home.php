@@ -4,7 +4,7 @@
 ?>
   <div class="container mx-auto my-5" style="max-width: 500px;">
     <h1 class="h1 mb-4 text-center">
-      <?php if (isset($_SESSION["user"])): ?>
+      <?php if (isLoggedIn()): ?>
         <?= $_SESSION["user"]["name"]; ?>'s Blog
       <?php else: ?>
         Simple CMS
@@ -12,7 +12,7 @@
     </h1>
 
     <!-- only show if user is logged in -->
-    <?php if (isset($_SESSION["user"])): ?>
+    <?php if (isLoggedIn()): ?>
       <!-- pending reverseArray foreach, separate post data table -->
       <div class="card mb-2">
         <div class="card-body">
@@ -55,7 +55,7 @@
 
     <div class="mt-4 d-flex justify-content-center gap-3">
       <!-- logged in vs signed out links -->
-      <?php if (isset($_SESSION["user"])): ?>
+      <?php if (isLoggedIn()): ?>
         <a href="/dashboard" class="btn btn-link btn-sm">Dashboard</a>
         <a href="/logout_action" class="btn btn-link btn-sm">Logout</a>
       <?php else: ?>

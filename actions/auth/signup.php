@@ -35,12 +35,8 @@ if (empty($name) || empty($email) || empty($password) || empty($confirm_password
       "password" => password_hash($password, PASSWORD_DEFAULT)
     ]);
 
-    // confirm account creation
-    $_SESSION["success"] = "Account successfully created.";
-    
-    // redirect to login
-    header("Location: /login");
-    exit;
+    // confirm account creation and redirect
+    setSuccess("Account successfully created.", "/login");
 
   // ensure email not in use 2/2
   } else {

@@ -1,5 +1,5 @@
 <!-- redirect if user already logged in -->
-<?php if (isset($_SESSION["user"])): ?>
+<?php if (isLoggedIn()): ?>
   <?php 
     header("Location: /");
     exit;

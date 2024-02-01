@@ -1,22 +1,27 @@
 <?php
+require "parts/auth_admin.php";
+
 // connect to database
 $database = connectToDB();
 
-// get data from SESSION, POST
-$id = $_SESSION["edit"];
+// get data from POST
 $name = $_POST["name"];
 $email = $_POST["email"];
 $role = $_POST["role"];
+$id = $_POST["id"];
 
 // error-handling
 // ensure all fields filled
 if (empty($name) || empty($email) || empty($role)) {
-  setError("All fields are required.", "/edituser");
+  setError("All fields are required.", "/edituser?id=".$id);
 } else {
-  // ensure email not in use 1/2
-  $sql = "SELECT * FROM users WHERE email = :email";
+  // ensure email not in use AND not checking self 1/2; prevents "email in use" if email not edited
+  $sql = "SELECT * FROM users WHERE email = :email AND id != :id";
   $query = $database -> prepare($sql);
-  $query -> execute(["email" => $email]);
+  $query -> execute([
+    "email" => $email,
+    "id" => $id
+  ]);
   $user = $query -> fetch();
   if (empty($user)) {
 
@@ -30,18 +35,11 @@ if (empty($name) || empty($email) || empty($role)) {
       "id" => $id
     ]);
 
-    // clear edit instance
-    unset($_SESSION["edit"]);
+    // confirm user updated and redirect
+    setSuccess("User updated.", "/manageuser");
 
-    // confirm user update
-    $_SESSION["success"] = "User updated.";
-    
-    // redirect to Manage Users
-    header("Location: /manageuser");
-    exit;
-
-  // ensure email not in use 2/2
+  // ensure email not in use AND not checking self 2/2;
   } else {
-    setError("Email is already in use.", "/edituser");
+    setError("Email is already in use.", "/edituser?id=".$id);
   }
 }

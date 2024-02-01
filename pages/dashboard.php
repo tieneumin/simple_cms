@@ -1,4 +1,7 @@
-<?php require "parts/header.php"; ?>
+<?php
+  require "parts/auth_login.php";
+  require "parts/header.php";
+?>
   <div class="container mx-auto my-5" style="max-width: 800px">
     <h1 class="h1 mb-4 text-center">Dashboard</h1>
     <div class="row">
@@ -20,7 +23,7 @@
         </div>
       </div>
       <!-- only show if user is admin -->
-      <?php if (isset($_SESSION["user"]) && $_SESSION["user"]["role"] === "admin"): ?>
+      <?php if (isAdmin()): ?>
         <div class="col">
           <div class="card mb-2">
             <div class="card-body">
