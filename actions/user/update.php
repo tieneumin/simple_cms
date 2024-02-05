@@ -12,7 +12,7 @@ $id = $_POST["id"];
 
 // error-handling
 // ensure all fields filled
-if (empty($name) || empty($email) || empty($role)) {
+if (empty($name) || empty($email)) {
   setError("All fields are required.", "/edituser?id=".$id);
 } else {
   // ensure email not in use AND not checking self 1/2; prevents "email in use" if email not edited

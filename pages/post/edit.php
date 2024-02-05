@@ -22,6 +22,7 @@
     </div>
     <div class="card mb-2 p-4">
       <?php require "parts/message_error.php"; ?>
+
       <form method="POST" action="/updatepost_action">
         <div class="mb-3">
           <label for="post-title" class="form-label">Title</label>
@@ -41,24 +42,30 @@
             rows="10"
             name="content"><?= $post["content"]; ?></textarea>
         </div>
-        <div class="mb-3">
-          <label for="post-content" class="form-label">Status</label>
-          <!-- option disabled for non-admin/editors -->
-          <select 
-            class="form-control" 
-            id="post-status" 
+        <!-- hide Status from users -->
+        <?php if (isAdmin() || isEditor()): ?>
+          <div class="mb-3">
+            <label for="post-content" class="form-label">Status</label>
+            <select 
+              class="form-control" 
+              id="post-status" 
+              name="status"
+            >
+              <option value="pending"
+                <?= $post["status"] === "pending"? "selected": "" ?>
+              >Pending Review</option>
+              <option value="published" 
+                <?= $post["status"] === "published"? "selected": "" ?>
+              >Published</option>
+            </select>
+          </div>
+        <?php else: ?>
+          <input 
+            type="hidden"
             name="status"
-            <?= isUser()? "disabled": ""; ?>
-          >
-            <!-- assign "selected" attribute to preselect option based on status -->
-            <option value="pending"
-              <?= $post["status"] === "pending"? "selected": "" ?>
-            >Pending Review</option>
-            <option value="published"
-              <?= $post["status"] === "published"? "selected": "" ?>
-            >Published</option>
-          </select>
-        </div>
+            value="<?= $post["status"]; ?>"
+          />
+        <?php endif; ?>
         <div class="d-grid">
           <input
             type="hidden"
@@ -68,6 +75,7 @@
           <button type="submit" class="btn btn-primary">Update</button>
         </div>
       </form>
+
     </div>
     <div class="text-center">
       <a href="/managepost" class="btn btn-link btn-sm"

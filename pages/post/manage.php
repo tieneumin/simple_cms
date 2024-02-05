@@ -4,16 +4,20 @@
   // connect to database
   $database = connectToDB();
 
-  // admin & editor see all posts; users see own post
+  // admin & editor see all posts, users see own post
   if (isAdmin() || isEditor()) {
-    $sql = "SELECT * FROM posts ORDER BY id DESC"; 
+    $sql = "SELECT posts.*, users.name FROM posts
+      JOIN users ON posts.user_id = users.id
+      ORDER BY id DESC"; 
     $query = $database -> prepare($sql);
     $query -> execute();
   } else {  
-    $user_id = $_SESSION["user"]["id"];
-    $sql = "SELECT * FROM posts WHERE user_id = :user_id ORDER BY id DESC";
+    $sql = "SELECT posts.*, users.name FROM posts
+      JOIN users ON posts.user_id = users.id
+      WHERE user_id = :user_id
+      ORDER BY id DESC"; 
     $query = $database -> prepare($sql);
-    $query -> execute(["user_id" => $user_id]);
+    $query -> execute(["user_id" => $_SESSION["user"]["id"]]);
   }
   // ALL posts
   $posts = $query -> fetchAll();
@@ -37,6 +41,7 @@
             <th scope="col">ID</th>
             <th scope="col" style="width: 40%">Title</th>
             <th scope="col">Status</th>
+            <th scope="col">Author</th>
             <th scope="col" class="text-end">Actions</th>
           </tr>
         </thead>
@@ -56,6 +61,8 @@
                   <span class="badge bg-success">Published</span>
                 <?php endif; ?>
               </td>
+              <!-- possible via JOIN/ON -->
+              <td><?= $post["name"]; ?></td>
               <td class="text-end">
                 <div class="buttons">
                   <!-- view button -->

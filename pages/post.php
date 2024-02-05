@@ -1,34 +1,40 @@
-<?php require "parts/header.php"; ?>
+<?php
+  $database = connectToDB();
+
+  // get data from GET if available
+  $id = isset($_GET["id"])? $_GET["id"]: "";
+
+  // query for target post
+  $sql = "SELECT posts.*, users.name AS username
+    FROM posts
+    JOIN users
+    ON posts.user_id = users.id
+    WHERE posts.id = :id AND status = :status"; 
+  $query = $database -> prepare($sql);
+  $query -> execute([
+    "id" => $id,
+    "status" => "published"
+  ]);
+  $post = $query -> fetch();
+
+  require "parts/header.php";
+?>
   <div class="container mx-auto my-5" style="max-width: 500px">
-    <h1 class="h1 mb-4 text-center">Post 1</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris purus
-      risus, euismod ac tristique in, suscipit quis quam. Vestibulum ante
-      ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
-      Vestibulum eget dapibus nibh. Pellentesque nec maximus odio. In pretium
-      diam metus, sed suscipit neque porttitor vitae. Vestibulum a mattis
-      eros. Integer fermentum arcu dolor, nec interdum sem tincidunt in. Cras
-      malesuada a neque ut sodales. Nulla facilisi.
-    </p>
+    <!-- show post if published, error if not; $post returns false if query not found -->
+    <?php if ($post): ?>
+      <h1 class="h1 text-center"><?= $post["title"]; ?></h1>
+      <!-- $post["username"] possible via AS and JOIN/ON -->
+      <h6 class="mb-3 text-center">By <?= $post["username"]; ?></h6>
+      <!-- long method to code paragraphing:
+      $paragraph_array = preg_split("/\n\s*\n/", $post["content"]);
+      foreach ($paragraph_array as $paragraph) {
+        echo "<p>$paragraph</p>";
+      } -->
+      <p><?= nl2br($post["content"]); ?></p>
+    <?php else: ?>
+      <p class="lead text-center">This post is not available.</h1>
+    <?php endif; ?>
 
-    <p>
-      Phasellus sodales arcu quis felis sollicitudin vehicula. Aliquam viverra
-      sem ac bibendum tincidunt. Donec pulvinar id purus sagittis laoreet. Sed
-      aliquet ac nisi vehicula rutrum. Proin non risus et erat rhoncus
-      aliquet. Nam sollicitudin facilisis elit, a consequat arcu placerat eu.
-      Pellentesque euismod et est quis faucibus.
-    </p>
-
-    <p>
-      Curabitur sit amet nisl feugiat, efficitur nibh et, efficitur ex. Morbi
-      nec fringilla nisl. Praesent blandit pellentesque urna, a tristique nunc
-      lacinia quis. Integer semper cursus lectus, ac hendrerit mi volutpat sit
-      amet. Etiam iaculis arcu eget augue sollicitudin, vel luctus lorem
-      vulputate. Donec euismod eu dolor interdum efficitur. Vestibulum
-      finibus, lectus sed condimentum ornare, velit nisi malesuada ligula,
-      eget posuere augue metus et dolor. Nunc purus eros, ultricies in sapien
-      quis, sagittis posuere risus.
-    </p>
     <div class="text-center mt-3">
       <!-- should vary; either / or /manage-posts -->
       <a href="/" class="btn btn-link btn-sm"

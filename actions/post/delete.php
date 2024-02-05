@@ -13,5 +13,5 @@ $sql = "DELETE FROM posts where id = :id";
 $query = $database -> prepare($sql);
 $query -> execute(["id" => $id]);
 
-// confirm post deletion and redirect
+// confirm post deleted and redirect
 setSuccess("Post deleted.", "/managepost");

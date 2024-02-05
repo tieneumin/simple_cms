@@ -13,6 +13,6 @@ $sql = "DELETE FROM users where id = :id";
 $query = $database -> prepare($sql);
 $query -> execute(["id" => $id]);
 
-// confirm user deletion and redirect
+// confirm user deleted and redirect
 setSuccess("User deleted.", "/manageuser");
  

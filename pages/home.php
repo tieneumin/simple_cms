@@ -1,7 +1,14 @@
 <?php 
   $database = connectToDB();
+
+  // query for all published posts in reverse order
+  $sql = "SELECT * FROM posts WHERE status = :status ORDER BY id DESC"; 
+  $query = $database -> prepare($sql);
+  $query -> execute(["status" => "published"]);
+  $posts = $query -> fetchAll();
+
   require "parts/header.php";
-?>
+?> 
   <div class="container mx-auto my-5" style="max-width: 500px;">
     <h1 class="h1 mb-4 text-center">
       <?php if (isLoggedIn()): ?>
@@ -11,47 +18,17 @@
       <?php endif; ?>
     </h1>
 
-    <!-- only show if user is logged in -->
-    <?php if (isLoggedIn()): ?>
-      <!-- pending reverseArray foreach, separate post data table -->
+    <?php foreach ($posts as $post): ?>
       <div class="card mb-2">
         <div class="card-body">
-          <h5 class="card-title">Post 4</h5>
-          <p class="card-text">Here's some content about post 4</p>
+          <h5 class="card-title"><?= $post["title"]; ?></h5>
+          <p class="card-text"><?= nl2br($post["content"]); ?></p>
           <div class="text-end">
-            <a href="/post" class="btn btn-primary btn-sm">Read More</a>
+            <a href="/post?id=<?= $post["id"]; ?>" class="btn btn-primary btn-sm">Read More</a>
           </div>
         </div>
       </div>
-      <!-- end of foreach -->
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5 class="card-title">Post 3</h5>
-          <p class="card-text">This is for post 3</p>
-          <div class="text-end">
-            <a href="/post" class="btn btn-primary btn-sm">Read More</a>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5 class="card-title">Post 2</h5>
-          <p class="card-text">This is about post 2</p>
-          <div class="text-end">
-            <a href="/post" class="btn btn-primary btn-sm">Read More</a>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5 class="card-title">Post 1</h5>
-          <p class="card-text">This is a post</p>
-          <div class="text-end">
-            <a href="/post" class="btn btn-primary btn-sm">Read More</a>
-          </div>
-        </div>
-      </div>
-    <?php endif; ?>
+    <?php endforeach; ?>
 
     <div class="mt-4 d-flex justify-content-center gap-3">
       <!-- logged in vs signed out links -->

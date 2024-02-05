@@ -12,7 +12,7 @@ $id = $_POST["id"];
 
 // error-handling
 // ensure all fields filled
-if (empty($title) || empty($content) || empty($status)) {
+if (empty($title) || empty($content)) {
   setError("All fields are required.", "/editpost?id=".$id);
 } else {
     // update post
